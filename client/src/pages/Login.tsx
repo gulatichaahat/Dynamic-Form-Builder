@@ -34,6 +34,8 @@ const handleSubmit=async(e:any)=>{
 
 e.preventDefault();
 
+console.log("Login button clicked");
+
 try{
 
 const res=await API.post(
@@ -44,6 +46,7 @@ form
 
 );
 
+console.log(res);
 
 localStorage.setItem(
 
@@ -67,16 +70,19 @@ navigate(
 
 catch(error:any){
 
+console.log(error);
+
 alert(
 
-error.response.data.message
+error?.response?.data?.message ||
+
+error.message ||
+
+"Login Failed"
 
 );
 
 }
-
-};
-
 
 return(
 
@@ -247,6 +253,6 @@ borderRadius:"8px",
 cursor:"pointer"
 
 };
-
+}
 
 export default Login;
