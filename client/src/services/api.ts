@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
 
-    baseURL: "http://localhost:5001/api"
+    baseURL: "https://https://dynamic-form-builder-1-rqfu.onrender.com.onrender.com/api"
 
 });
 
