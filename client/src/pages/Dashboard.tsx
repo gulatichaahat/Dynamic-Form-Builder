@@ -1,4 +1,3 @@
-```tsx
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API from "../services/api";
@@ -654,4 +653,3 @@ const buttonStyle = {
 
 
 export default Dashboard;
-```
