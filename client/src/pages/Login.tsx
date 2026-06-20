@@ -171,6 +171,47 @@ Login
 
 }
 
+<p
+style={{
+
+marginTop:"20px",
+
+textAlign:"center"
+
+}}
+>
+
+Don't have an account?
+
+<button
+
+onClick={()=>
+
+navigate("/register")
+
+}
+
+style={{
+
+background:"none",
+
+border:"none",
+
+color:"#2575fc",
+
+cursor:"pointer",
+
+fontWeight:"bold"
+
+}}
+
+>
+
+Register
+
+</button>
+
+</p>
 
 const inputStyle={
 
