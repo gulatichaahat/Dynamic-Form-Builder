@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import API from "../services/api";
-import dashboard from "./Dashboard";
 function Login(){
 
 const navigate=useNavigate();
@@ -83,6 +82,8 @@ error.message ||
 );
 
 }
+
+};
 
 return(
 
@@ -169,15 +170,9 @@ Login
 
 </button>
 
-</form>
-
-</div>
-
-);
-
-}
 
 <p
+
 style={{
 
 marginTop:"20px",
@@ -185,6 +180,7 @@ marginTop:"20px",
 textAlign:"center"
 
 }}
+
 >
 
 Don't have an account?
@@ -218,6 +214,15 @@ Register
 </button>
 
 </p>
+
+</form>
+
+</div>
+
+);
+
+}
+
 
 const inputStyle={
 
@@ -253,6 +258,6 @@ borderRadius:"8px",
 cursor:"pointer"
 
 };
-}
+
 
 export default Login;
