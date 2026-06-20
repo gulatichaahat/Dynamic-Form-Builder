@@ -17,6 +17,8 @@ function EditForm() {
 
     const [fields, setFields] = useState<any[]>([]);
 
+    const [isUpdated, setIsUpdated] = useState(false);
+
 
     useEffect(() => {
 
@@ -167,11 +169,7 @@ function EditForm() {
 
             );
 
-            navigate(
-
-                "/dashboard"
-
-            );
+            setIsUpdated(true);
 
         }
 
@@ -190,44 +188,255 @@ function EditForm() {
     };
 
 
+    if (isUpdated) {
+
+        return (
+
+            <div
+
+                style={{
+
+                    minHeight: "100vh",
+
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    justifyContent: "center",
+
+                    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+
+                    padding: "20px"
+
+                }}
+
+            >
+
+                <div
+
+                    style={{
+
+                        background: "white",
+
+                        borderRadius: "16px",
+
+                        padding: "60px 40px",
+
+                        textAlign: "center",
+
+                        boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
+
+                        maxWidth: "500px",
+
+                        width: "100%"
+
+                    }}
+
+                >
+
+                    <div
+
+                        style={{
+
+                            fontSize: "80px",
+
+                            marginBottom: "20px",
+
+                            color: "#28a745"
+
+                        }}
+
+                    >
+
+                        ✓
+
+                    </div>
+
+
+                    <h1
+
+                        style={{
+
+                            fontSize: "36px",
+
+                            fontWeight: "bold",
+
+                            color: "#1a1a1a",
+
+                            marginBottom: "10px",
+
+                            margin: 0
+
+                        }}
+
+                    >
+
+                        Form Updated!
+
+                    </h1>
+
+
+                    <p
+
+                        style={{
+
+                            fontSize: "18px",
+
+                            color: "#666",
+
+                            marginTop: "15px",
+
+                            marginBottom: "30px",
+
+                            lineHeight: 1.6
+
+                        }}
+
+                    >
+
+                        Your form <strong>"{title}"</strong> has been updated successfully!
+
+                    </p>
+
+
+                    <button
+
+                        onClick={() => navigate("/dashboard")}
+
+                        style={{
+
+                            padding: "12px 30px",
+
+                            background: "#2575fc",
+
+                            color: "white",
+
+                            border: "none",
+
+                            borderRadius: "8px",
+
+                            fontSize: "16px",
+
+                            fontWeight: "500",
+
+                            cursor: "pointer",
+
+                            transition: "background 0.3s ease"
+
+                        }}
+
+                        onMouseEnter={(e) => (e.target as HTMLButtonElement).style.background = "#1a5bb8"}
+
+                        onMouseLeave={(e) => (e.target as HTMLButtonElement).style.background = "#2575fc"}
+
+                    >
+
+                        Back to Dashboard
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        );
+
+    }
+
+
     return (
 
         <div
 
             style={{
 
-                padding: "40px"
+                minHeight: "100vh",
+
+                background: "#f8f9fa",
+
+                padding: "40px 30px"
 
             }}
 
         >
 
-            <h1>
+            <h1
+
+                style={{
+
+                    fontSize: "32px",
+
+                    fontWeight: "bold",
+
+                    color: "#1a1a1a",
+
+                    marginBottom: "8px"
+
+                }}
+
+            >
 
                 Edit Form
 
             </h1>
 
 
-            <input
+            <p
 
-                value={title}
+                style={{
 
-                onChange={(e) =>
+                    fontSize: "14px",
 
-                    setTitle(
+                    color: "#666",
 
-                        e.target.value
+                    marginBottom: "30px"
 
-                    )
+                }}
 
-                }
+            >
 
-                placeholder="Title"
+                Update your form details
 
-                style={inputStyle}
+            </p>
 
-            />
+
+            <div
+
+                style={{
+
+                    maxWidth: "700px",
+
+                    background: "white",
+
+                    borderRadius: "12px",
+
+                    padding: "30px",
+
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+
+                }}
+
+            >
+
+                <input
+
+                    value={title}
+
+                    onChange={(e) =>
+
+                        setTitle(
+
+                            e.target.value
+
+                        )
+
+                    }
+
+                    placeholder="Title"
+
+                    style={inputStyle}
+
+                />
 
 
             <br />
@@ -616,6 +825,8 @@ function EditForm() {
 
             </button>
 
+            </div>
+
         </div>
 
     );
@@ -625,13 +836,19 @@ function EditForm() {
 
 const inputStyle = {
 
-    width: "400px",
+    width: "100%",
 
-    padding: "12px",
+    padding: "12px 14px",
+
+    fontSize: "14px",
 
     borderRadius: "8px",
 
-    border: "1px solid gray"
+    border: "1px solid #ddd",
+
+    boxSizing: "border-box" as const,
+
+    fontFamily: "inherit"
 
 };
 

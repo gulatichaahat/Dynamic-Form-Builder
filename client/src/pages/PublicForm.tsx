@@ -13,6 +13,8 @@ function PublicForm() {
 
     const [responses, setResponses] = useState<any>({});
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
 
     useEffect(() => {
 
@@ -128,11 +130,7 @@ function PublicForm() {
 
             );
 
-            alert(
-
-                "Response Submitted"
-
-            );
+            setIsSubmitted(true);
 
         }
 
@@ -154,6 +152,144 @@ function PublicForm() {
     if (!form)
 
         return <h1>Loading...</h1>;
+
+    
+    if (isSubmitted) {
+
+        return (
+
+            <div
+
+                style={{
+
+                    minHeight: "100vh",
+
+                    display: "flex",
+
+                    alignItems: "center",
+
+                    justifyContent: "center",
+
+                    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+
+                    padding: "20px"
+
+                }}
+
+            >
+
+                <div
+
+                    style={{
+
+                        background: "white",
+
+                        borderRadius: "16px",
+
+                        padding: "60px 40px",
+
+                        textAlign: "center",
+
+                        boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
+
+                        maxWidth: "500px",
+
+                        width: "100%"
+
+                    }}
+
+                >
+
+                    <div
+
+                        style={{
+
+                            fontSize: "80px",
+
+                            marginBottom: "20px",
+
+                            color: "#28a745"
+
+                        }}
+
+                    >
+
+                        ✓
+
+                    </div>
+
+
+                    <h1
+
+                        style={{
+
+                            fontSize: "36px",
+
+                            fontWeight: "bold",
+
+                            color: "#1a1a1a",
+
+                            marginBottom: "10px",
+
+                            margin: 0
+
+                        }}
+
+                    >
+
+                        Thank You!
+
+                    </h1>
+
+
+                    <p
+
+                        style={{
+
+                            fontSize: "18px",
+
+                            color: "#666",
+
+                            marginTop: "15px",
+
+                            marginBottom: "30px",
+
+                            lineHeight: 1.6
+
+                        }}
+
+                    >
+
+                        Your response to <strong>"{form.title}"</strong> has been submitted successfully.
+
+                    </p>
+
+
+                    <p
+
+                        style={{
+
+                            fontSize: "14px",
+
+                            color: "#999",
+
+                            marginBottom: 0
+
+                        }}
+
+                    >
+
+                        We appreciate your feedback!
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        );
+
+    }
 
 
     return (
@@ -530,15 +666,19 @@ function PublicForm() {
 
 const inputStyle = {
 
-    width: "400px",
+    width: "100%",
 
-    padding: "12px",
+    padding: "10px 12px",
 
-    marginTop: "10px",
+    fontSize: "14px",
 
-    borderRadius: "8px",
+    borderRadius: "6px",
 
-    border: "1px solid gray"
+    border: "1px solid #ddd",
+
+    boxSizing: "border-box" as const,
+
+    fontFamily: "inherit"
 
 };
 

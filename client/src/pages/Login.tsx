@@ -87,48 +87,38 @@ error.message ||
 
 return(
 
-<div style={{
+<div style={containerStyle}>
 
-height:"100vh",
+<div style={leftSectionStyle}>
 
-display:"flex",
+<h1 style={brandTitleStyle}>FormFlow</h1>
 
-justifyContent:"center",
+<p style={brandSubtitleStyle}>Create beautiful forms in seconds</p>
 
-alignItems:"center",
+<p style={featureStyle}>✓ Easy to use</p>
 
-background:
+<p style={featureStyle}>✓ Professional designs</p>
 
-"linear-gradient(to right,#6a11cb,#2575fc)"
+<p style={featureStyle}>✓ Real-time analytics</p>
 
-}}>
+</div>
 
 <form
 
 onSubmit={handleSubmit}
 
-style={{
-
-background:"white",
-
-padding:"40px",
-
-borderRadius:"20px",
-
-width:"350px",
-
-boxShadow:"0 0 20px rgba(0,0,0,0.3)"
-
-}}
+style={formCardStyle}
 
 >
 
-<h1>
+<h2 style={titleStyle}>Welcome Back</h2>
 
-Login
+<p style={subtitleStyle}>Sign in to your account</p>
 
-</h1>
 
+<div style={inputWrapperStyle}>
+
+<label style={labelStyle}>Email Address</label>
 
 <input
 
@@ -136,7 +126,7 @@ type="email"
 
 name="email"
 
-placeholder="Enter Email"
+placeholder="name@example.com"
 
 onChange={handleChange}
 
@@ -144,6 +134,12 @@ style={inputStyle}
 
 />
 
+</div>
+
+
+<div style={inputWrapperStyle}>
+
+<label style={labelStyle}>Password</label>
 
 <input
 
@@ -151,7 +147,7 @@ type="password"
 
 name="password"
 
-placeholder="Enter Password"
+placeholder="••••••••"
 
 onChange={handleChange}
 
@@ -159,103 +155,295 @@ style={inputStyle}
 
 />
 
+</div>
+
 
 <button
 
-style={buttonStyle}
+                style={buttonStyle}
 
->
+                onMouseEnter={(e) => (e.target as HTMLButtonElement).style.background = "#1a5bb8"}
 
-Login
+                onMouseLeave={(e) => (e.target as HTMLButtonElement).style.background = "#2575fc"}
 
-</button>
+                >
+
+                Sign In
+
+                </button>
 
 
-<p
+<div style={dividerStyle}>
 
-style={{
-
-marginTop:"20px",
-
-textAlign:"center"
-
-}}
-
->
-
-Don't have an account?
-
-<button
-
-onClick={()=>
-
-navigate("/register")
-
-}
-
-style={{
-
-background:"none",
-
-border:"none",
-
-color:"#2575fc",
-
-cursor:"pointer",
-
-fontWeight:"bold"
-
-}}
-
->
-
-Register
-
-</button>
-
-</p>
-
-</form>
+<span style={dividerTextStyle}>New here?</span>
 
 </div>
 
-);
+
+<button
+
+                type="button"
+
+                onClick={()=>navigate("/register")}
+
+                style={secondaryButtonStyle}
+
+                onMouseEnter={(e) => {
+
+                    (e.target as HTMLButtonElement).style.background = "#f0f0f0";
+
+                    (e.target as HTMLButtonElement).style.color = "#2575fc";
+
+                }}
+
+                onMouseLeave={(e) => {
+
+                    (e.target as HTMLButtonElement).style.background = "white";
+
+                    (e.target as HTMLButtonElement).style.color = "#666";
+
+                }}
+
+                >
+
+                Create an account
+
+                </button>
+
+            </form>
+
+        </div>
+
+    );
 
 }
 
 
-const inputStyle={
+const containerStyle = {
 
-width:"100%",
+minHeight: "100vh",
 
-padding:"12px",
+display: "flex",
 
-marginTop:"15px",
-
-borderRadius:"8px",
-
-border:"1px solid gray"
+background: "#f8f9fa"
 
 };
 
+const leftSectionStyle = {
 
-const buttonStyle={
+flex: 1,
 
-width:"100%",
+background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
 
-padding:"12px",
+color: "white",
 
-marginTop:"20px",
+padding: "60px 40px",
 
-background:"#2575fc",
+display: "flex",
 
-color:"white",
+flexDirection: "column" as const,
 
-border:"none",
+justifyContent: "center",
 
-borderRadius:"8px",
+alignItems: "flex-start"
 
-cursor:"pointer"
+};
+
+const brandTitleStyle = {
+
+fontSize: "42px",
+
+fontWeight: "bold",
+
+marginBottom: "15px",
+
+color: "white"
+
+};
+
+const brandSubtitleStyle = {
+
+fontSize: "20px",
+
+marginBottom: "40px",
+
+color: "rgba(255,255,255,0.9)"
+
+};
+
+const featureStyle = {
+
+fontSize: "16px",
+
+marginBottom: "20px",
+
+color: "rgba(255,255,255,0.85)",
+
+fontWeight: "500"
+
+};
+
+const formCardStyle = {
+
+flex: 1,
+
+display: "flex",
+
+flexDirection: "column" as const,
+
+justifyContent: "center",
+
+alignItems: "center",
+
+padding: "60px 40px"
+
+};
+
+const titleStyle = {
+
+fontSize: "28px",
+
+fontWeight: "bold",
+
+color: "#1a1a1a",
+
+marginBottom: "8px"
+
+};
+
+const subtitleStyle = {
+
+fontSize: "14px",
+
+color: "#666",
+
+marginBottom: "30px"
+
+};
+
+const inputWrapperStyle = {
+
+width: "100%",
+
+maxWidth: "400px",
+
+marginBottom: "20px"
+
+};
+
+const labelStyle = {
+
+display: "block",
+
+marginBottom: "8px",
+
+fontSize: "14px",
+
+fontWeight: "500",
+
+color: "#333"
+
+};
+
+const inputStyle = {
+
+width: "100%",
+
+padding: "12px 14px",
+
+fontSize: "14px",
+
+borderRadius: "8px",
+
+border: "1px solid #ddd",
+
+boxSizing: "border-box" as const,
+
+transition: "all 0.3s ease",
+
+fontFamily: "inherit"
+
+};
+
+const buttonStyle = {
+
+width: "100%",
+
+maxWidth: "400px",
+
+padding: "12px",
+
+marginTop: "10px",
+
+background: "#2575fc",
+
+color: "white",
+
+border: "none",
+
+borderRadius: "8px",
+
+cursor: "pointer",
+
+fontSize: "15px",
+
+fontWeight: "600",
+
+transition: "all 0.3s ease"
+
+};
+
+const dividerStyle = {
+
+width: "100%",
+
+maxWidth: "400px",
+
+display: "flex",
+
+alignItems: "center",
+
+margin: "25px 0",
+
+color: "#ddd"
+
+};
+
+const dividerTextStyle = {
+
+flex: 1,
+
+textAlign: "center" as const,
+
+color: "#999",
+
+fontSize: "13px"
+
+};
+
+const secondaryButtonStyle = {
+
+width: "100%",
+
+maxWidth: "400px",
+
+padding: "12px",
+
+background: "white",
+
+color: "#666",
+
+border: "1px solid #ddd",
+
+borderRadius: "8px",
+
+cursor: "pointer",
+
+fontSize: "15px",
+
+fontWeight: "600",
+
+transition: "all 0.3s ease"
 
 };
 

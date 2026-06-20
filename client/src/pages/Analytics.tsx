@@ -156,147 +156,77 @@ Math.max(
 
 return(
 
-<div
+<div style={containerStyle}>
 
-style={{
+<div style={headerStyle}>
 
-padding:"40px",
+<h1 style={pageTitle}>📊 Analytics</h1>
 
-background:"#f5f5f5",
-
-minHeight:"100vh"
-
-}}
-
->
-
-<h1>
-
-📊 Analytics
-
-</h1>
-
-
-<div
-
-style={{
-
-display:"flex",
-
-gap:"30px",
-
-marginTop:"30px"
-
-}}
-
->
-
-<div style={cardStyle}>
-
-<h3>
-
-Total Responses
-
-</h3>
-
-<h1>
-
-{
-
-analytics.totalSubmissions
-
-}
-
-</h1>
+<p style={pageSubtitle}>Track your form performance</p>
 
 </div>
 
 
-<div style={cardStyle}>
+<div style={statsGridStyle}>
 
-<h3>
+<div style={statsCard}>
 
-Total Views
+<div style={statsLabelStyle}>Total Responses</div>
 
-</h3>
+<div style={statsNumber}>
 
-<h1>
+{analytics.totalSubmissions}
 
-{
+</div>
 
-analytics.totalViews || 0
+</div>
 
-}
+<div style={statsCard}>
 
-</h1>
+<div style={statsLabelStyle}>Total Views</div>
+
+<div style={statsNumber}>
+
+{analytics.totalViews || 0}
+
+</div>
+
+</div>
+
+<div style={statsCard}>
+
+<div style={statsLabelStyle}>Completion Rate</div>
+
+<div style={statsNumber}>
+
+{analytics.totalViews ? Math.round((analytics.totalSubmissions / analytics.totalViews) * 100) : 0}%
+
+</div>
 
 </div>
 
 </div>
 
 
-<h2
+<div style={chartsContainerStyle}>
 
-style={{
+<div style={chartWrapperStyle}>
 
-marginTop:"50px"
+<h3 style={chartTitleStyle}>Response Trend</h3>
 
-}}
+<div style={chartBoxStyle}>
 
->
+<ResponsiveContainer width="100%" height={300}>
 
-Responses Bar Chart
+<BarChart data={barData}>
 
-</h2>
-
-
-<div
-
-style={{
-
-background:"white",
-
-padding:"20px",
-
-borderRadius:"15px",
-
-height:"300px",
-
-marginTop:"20px"
-
-}}
-
->
-
-<ResponsiveContainer
-
-width="100%"
-
-height="100%"
-
->
-
-<BarChart
-
-data={barData}
-
->
-
-<XAxis
-
-dataKey="name"
-
-/>
+<XAxis dataKey="name" />
 
 <YAxis/>
 
 <Tooltip/>
 
-<Bar
-
-dataKey="count"
-
-/>
+<Bar dataKey="count" fill="#2575fc" />
 
 </BarChart>
 
@@ -304,47 +234,16 @@ dataKey="count"
 
 </div>
 
-
-<h2
-
-style={{
-
-marginTop:"50px"
-
-}}
-
->
-
-Responses Pie Chart
-
-</h2>
+</div>
 
 
-<div
+<div style={chartWrapperStyle}>
 
-style={{
+<h3 style={chartTitleStyle}>Response Distribution</h3>
 
-background:"white",
+<div style={chartBoxStyle}>
 
-padding:"20px",
-
-borderRadius:"15px",
-
-height:"350px",
-
-marginTop:"20px"
-
-}}
-
->
-
-<ResponsiveContainer
-
-width="100%"
-
-height="100%"
-
->
+<ResponsiveContainer width="100%" height={300}>
 
 <PieChart>
 
@@ -360,9 +259,9 @@ label
 
 >
 
-<Cell/>
+<Cell fill="#2575fc"/>
 
-<Cell/>
+<Cell fill="#e0e0e0"/>
 
 </Pie>
 
@@ -374,101 +273,65 @@ label
 
 </div>
 
-
-<h2
-
-style={{
-
-marginTop:"50px"
-
-}}
-
->
-
-Latest Responses
-
-</h2>
-
-
-{
-
-analytics.responses?.map(
-
-(response:any,index:number)=>(
-
-<div
-
-key={index}
-
-style={{
-
-background:"white",
-
-padding:"20px",
-
-marginTop:"20px",
-
-borderRadius:"10px",
-
-boxShadow:
-
-"0 0 10px rgba(0,0,0,0.1)"
-
-}}
-
->
-
-{
-
-Object.entries(
-
-response.answers
-
-).map(
-
-([key,value]:any)=>(
-
-<p key={key}>
-
-<b>
-
-{key}
-
-</b>
-
-:
-
-{" "}
-
-{
-
-Array.isArray(value)
-
-?
-
-value.join(", ")
-
-:
-
-value
-
-}
-
-</p>
-
-)
-
-)
-
-}
+</div>
 
 </div>
 
-)
 
-)
+<div style={responsesContainerStyle}>
 
-}
+<h2 style={sectionTitleStyle}>Recent Submissions</h2>
+
+<p style={sectionSubtitleStyle}>{analytics.responses?.length || 0} response(s)</p>
+
+
+{analytics.responses && analytics.responses.length > 0 ? (
+
+<div style={responsesGridStyle}>
+
+{analytics.responses.slice(0, 5).map((response:any,index:number)=>(
+
+<div key={index} style={submissionCardStyle}>
+
+<h4 style={submissionNumberStyle}>Submission #{index+1}</h4>
+
+<div style={submissionContentStyle}>
+
+{Object.entries(response.answers).map(([key,value]:any)=>(
+
+<div key={key} style={submissionItemStyle}>
+
+<span style={submissionKeyStyle}>{key}:</span>
+
+<span style={submissionValueStyle}>
+
+{Array.isArray(value) ? value.join(", ") : value}
+
+</span>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+) : (
+
+<div style={emptyStyle}>
+
+<p style={emptyTextStyle}>No submissions yet</p>
+
+</div>
+
+)}
+
+</div>
 
 </div>
 
@@ -477,19 +340,261 @@ value
 }
 
 
-const cardStyle={
+const containerStyle = {
 
-background:"white",
+minHeight: "100vh",
 
-padding:"30px",
+background: "#f8f9fa",
 
-width:"250px",
+padding: "40px 30px"
 
-borderRadius:"15px",
+};
 
-boxShadow:
+const headerStyle = {
 
-"0 0 15px rgba(0,0,0,0.1)"
+marginBottom: "40px"
+
+};
+
+const pageTitle = {
+
+fontSize: "32px",
+
+fontWeight: "bold",
+
+color: "#1a1a1a",
+
+margin: "0 0 8px 0"
+
+};
+
+const pageSubtitle = {
+
+fontSize: "14px",
+
+color: "#666",
+
+margin: 0
+
+};
+
+const statsGridStyle = {
+
+display: "grid",
+
+gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+
+gap: "20px",
+
+marginBottom: "40px"
+
+};
+
+const statsCard = {
+
+background: "white",
+
+padding: "25px",
+
+borderRadius: "12px",
+
+boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+
+textAlign: "center" as const
+
+};
+
+const statsLabelStyle = {
+
+fontSize: "13px",
+
+fontWeight: "500",
+
+color: "#666",
+
+marginBottom: "12px"
+
+};
+
+const statsNumber = {
+
+fontSize: "32px",
+
+fontWeight: "bold",
+
+color: "#2575fc"
+
+};
+
+const chartsContainerStyle = {
+
+display: "grid",
+
+gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+
+gap: "20px",
+
+marginBottom: "40px"
+
+};
+
+const chartWrapperStyle = {
+
+background: "white",
+
+borderRadius: "12px",
+
+padding: "20px",
+
+boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+
+};
+
+const chartTitleStyle = {
+
+fontSize: "16px",
+
+fontWeight: "600",
+
+color: "#1a1a1a",
+
+marginBottom: "15px",
+
+margin: "0 0 15px 0"
+
+};
+
+const chartBoxStyle = {
+
+background: "#f8f9fa",
+
+borderRadius: "8px",
+
+padding: "10px"
+
+};
+
+const responsesContainerStyle = {
+
+background: "white",
+
+borderRadius: "12px",
+
+padding: "25px",
+
+boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+
+};
+
+const sectionTitleStyle = {
+
+fontSize: "18px",
+
+fontWeight: "600",
+
+color: "#1a1a1a",
+
+margin: "0 0 8px 0"
+
+};
+
+const sectionSubtitleStyle = {
+
+fontSize: "13px",
+
+color: "#666",
+
+margin: "0 0 20px 0"
+
+};
+
+const responsesGridStyle = {
+
+display: "grid",
+
+gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+
+gap: "15px"
+
+};
+
+const submissionCardStyle = {
+
+background: "#f8f9fa",
+
+borderRadius: "8px",
+
+padding: "15px",
+
+border: "1px solid #e0e0e0"
+
+};
+
+const submissionNumberStyle = {
+
+fontSize: "13px",
+
+fontWeight: "600",
+
+color: "#2575fc",
+
+margin: "0 0 10px 0"
+
+};
+
+const submissionContentStyle = {
+
+display: "flex",
+
+flexDirection: "column" as const,
+
+gap: "8px"
+
+};
+
+const submissionItemStyle = {
+
+fontSize: "12px",
+
+display: "flex",
+
+flexWrap: "wrap" as const,
+
+gap: "5px"
+
+};
+
+const submissionKeyStyle = {
+
+fontWeight: "600",
+
+color: "#333"
+
+};
+
+const submissionValueStyle = {
+
+color: "#666"
+
+};
+
+const emptyStyle = {
+
+textAlign: "center" as const,
+
+padding: "40px",
+
+backgroundColor: "#f8f9fa",
+
+borderRadius: "8px"
+
+};
+
+const emptyTextStyle = {
+
+color: "#999",
+
+fontSize: "14px"
 
 };
 
