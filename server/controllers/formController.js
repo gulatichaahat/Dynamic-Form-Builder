@@ -91,6 +91,16 @@ const getForm = async(req,res)=>{
 
         );
 
+        if(!form){
+
+            return res.status(404).json({
+
+                message:"Form not found"
+
+            });
+
+        }
+
         res.json(form);
 
     }

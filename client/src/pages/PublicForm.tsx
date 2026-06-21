@@ -15,6 +15,8 @@ function PublicForm() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const [error, setError] = useState<string | null>(null);
+
 
     useEffect(() => {
 
@@ -44,6 +46,8 @@ function PublicForm() {
         catch (error) {
 
             console.log(error);
+
+            setError("Form not found");
 
         }
 
@@ -149,6 +153,11 @@ function PublicForm() {
     };
 
 
+    if (error)
+
+        return <div style={{padding: "20px", textAlign: "center"}}><h1>❌ {error}</h1><p>The form link is invalid or the form has been deleted.</p></div>;
+
+    
     if (!form)
 
         return <h1>Loading...</h1>;
