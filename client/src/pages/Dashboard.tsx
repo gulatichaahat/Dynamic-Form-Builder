@@ -473,7 +473,7 @@ function Dashboard() {
 
                                         .writeText(
 
-                                            `http://localhost:5173/form/${form._id}`
+                                            `${window.location.origin}/form/${form._id}`
 
                                         );
 
